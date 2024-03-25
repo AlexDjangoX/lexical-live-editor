@@ -27,6 +27,12 @@ import useLexicalEditable from '@lexical/react/useLexicalEditable';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
+import * as Y from 'yjs';
+import { Avatars } from './components/Avatars';
+import LiveblocksProvider from '@liveblocks/yjs';
+import { useRoom, useSelf } from './liveblocks.config';
+import { Provider } from '@lexical/yjs';
+
 import { createWebsocketProvider } from './collaboration';
 import { useSettings } from './context/SettingsContext';
 import { useSharedHistoryContext } from './context/SharedHistoryContext';
@@ -73,13 +79,31 @@ import ContentEditable from './ui/ContentEditable';
 import Placeholder from './ui/Placeholder';
 import { CAN_USE_DOM } from './shared/canUseDom';
 
+import {
+  LexicalEditor,
+  $getRoot,
+  $createParagraphNode,
+  $createTextNode,
+} from 'lexical';
+
 const skipCollaborationInit =
   typeof window !== 'undefined' &&
   window.parent != null &&
   // @ts-expect-error
   window.parent.frames.right === window;
 
+function initialEditorState(editor: LexicalEditor): void {
+  const root = $getRoot();
+  const paragraph = $createParagraphNode();
+  const text = $createTextNode();
+  paragraph.append(text);
+  root.append(paragraph);
+}
+
 export default function Editor(): JSX.Element {
+  const room = useRoom();
+  const userInfo = useSelf((me) => me.info);
+
   const { historyState } = useSharedHistoryContext();
   const {
     settings: {
@@ -100,8 +124,8 @@ export default function Editor(): JSX.Element {
   const text = isCollab
     ? 'Enter some collaborative rich text...'
     : isRichText
-    ? 'Enter some rich text...'
-    : 'Enter some plain text...';
+      ? 'Enter some rich text...'
+      : 'Enter some plain text...';
   const placeholder = <Placeholder>{text}</Placeholder>;
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
@@ -134,7 +158,26 @@ export default function Editor(): JSX.Element {
 
   return (
     <>
-      {isRichText && <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />}
+      {isRichText && (
+        <>
+          <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
+          <Avatars />
+        </>
+      )}
+      <CollaborationPlugin
+        id="yjs-plugin"
+        cursorColor={userInfo.color}
+        username={userInfo.name}
+        providerFactory={(id, yjsDocMap) => {
+          // Set up Liveblocks Yjs provider
+          const doc = new Y.Doc();
+          yjsDocMap.set(id, doc);
+          const provider = new LiveblocksProvider(room, doc) as Provider;
+          return provider;
+        }}
+        initialEditorState={initialEditorState}
+        shouldBootstrap={true}
+      />
       <div
         className={`editor-container ${showTreeView ? 'tree-view' : ''} ${
           !isRichText ? 'plain-text' : ''
