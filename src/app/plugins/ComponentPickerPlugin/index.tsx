@@ -6,6 +6,20 @@
  *
  */
 
+import {
+  MenuOption,
+  useBasicTypeaheadTriggerMatch,
+} from '@lexical/react/LexicalTypeaheadMenuPlugin';
+import dynamic from 'next/dynamic';
+
+const LexicalTypeaheadMenuPlugin = dynamic(
+  () =>
+    import('@lexical/react/LexicalTypeaheadMenuPlugin').then(
+      (mod) => mod.LexicalTypeaheadMenuPlugin
+    ),
+  { ssr: false }
+);
+
 import { $createCodeNode } from '@lexical/code';
 import {
   INSERT_CHECK_LIST_COMMAND,
@@ -15,11 +29,6 @@ import {
 import { INSERT_EMBED_COMMAND } from '@lexical/react/LexicalAutoEmbedPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { INSERT_HORIZONTAL_RULE_COMMAND } from '@lexical/react/LexicalHorizontalRuleNode';
-import {
-  LexicalTypeaheadMenuPlugin,
-  MenuOption,
-  useBasicTypeaheadTriggerMatch,
-} from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import { $createHeadingNode, $createQuoteNode } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
 import { INSERT_TABLE_COMMAND } from '@lexical/table';
@@ -362,6 +371,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
   return (
     <>
       {modal}
+      {/* @ts-ignore */}
       <LexicalTypeaheadMenuPlugin<ComponentPickerOption>
         onQueryChange={setQueryString}
         onSelectOption={onSelectOption}

@@ -943,6 +943,7 @@ export default function CommentPlugin({
   return (
     <>
       {showCommentInput &&
+        typeof document !== 'undefined' &&
         createPortal(
           <CommentInputBox
             editor={editor}
@@ -960,21 +961,23 @@ export default function CommentPlugin({
             editor={editor}
             onAddComment={onAddComment}
           />,
-          document.body
+          document?.body
         )}
-      {createPortal(
-        <Button
-          className={`CommentPlugin_ShowCommentsButton ${
-            showComments ? 'active' : ''
-          }`}
-          onClick={() => setShowComments(!showComments)}
-          title={showComments ? 'Hide Comments' : 'Show Comments'}
-        >
-          <i className="comments" />
-        </Button>,
-        document.body
-      )}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <Button
+            className={`CommentPlugin_ShowCommentsButton ${
+              showComments ? 'active' : ''
+            }`}
+            onClick={() => setShowComments(!showComments)}
+            title={showComments ? 'Hide Comments' : 'Show Comments'}
+          >
+            <i className="comments" />
+          </Button>,
+          document?.body
+        )}
       {showComments &&
+        typeof document !== 'undefined' &&
         createPortal(
           <CommentsPanel
             comments={comments}
@@ -983,7 +986,7 @@ export default function CommentPlugin({
             activeIDs={activeIDs}
             markNodeMap={markNodeMap}
           />,
-          document.body
+          document?.body
         )}
     </>
   );

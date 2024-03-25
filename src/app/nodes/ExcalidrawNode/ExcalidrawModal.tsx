@@ -8,15 +8,21 @@
 
 import './ExcalidrawModal.css';
 
-import {Excalidraw} from '@excalidraw/excalidraw';
+import { Excalidraw } from '@excalidraw/excalidraw';
 import {
   AppState,
   BinaryFiles,
   ExcalidrawImperativeAPI,
 } from '@excalidraw/excalidraw/types/types';
 import * as React from 'react';
-import {ReactPortal, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {createPortal} from 'react-dom';
+import {
+  ReactPortal,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
@@ -57,7 +63,7 @@ type Props = {
   onSave: (
     elements: ReadonlyArray<ExcalidrawElementFragment>,
     appState: Partial<AppState>,
-    files: BinaryFiles,
+    files: BinaryFiles
   ) => void;
 };
 
@@ -66,7 +72,7 @@ export const useCallbackRefState = () => {
     React.useState<ExcalidrawImperativeAPI | null>(null);
   const refCallback = React.useCallback(
     (value: ExcalidrawImperativeAPI | null) => setRefValue(value),
-    [],
+    []
   );
   return [refValue, refCallback] as const;
 };
@@ -152,17 +158,17 @@ export default function ExcalidrawModal({
       const appState = excalidrawAPI?.getAppState();
       // We only need a subset of the state
       const partialState: Partial<AppState> = {
-        exportBackground: appState.exportBackground,
-        exportScale: appState.exportScale,
-        exportWithDarkMode: appState.theme === 'dark',
-        isBindingEnabled: appState.isBindingEnabled,
-        isLoading: appState.isLoading,
-        name: appState.name,
-        theme: appState.theme,
-        viewBackgroundColor: appState.viewBackgroundColor,
-        viewModeEnabled: appState.viewModeEnabled,
-        zenModeEnabled: appState.zenModeEnabled,
-        zoom: appState.zoom,
+        exportBackground: appState?.exportBackground,
+        exportScale: appState?.exportScale,
+        exportWithDarkMode: appState?.theme === 'dark',
+        isBindingEnabled: appState?.isBindingEnabled,
+        isLoading: appState?.isLoading,
+        name: appState?.name,
+        theme: appState?.theme,
+        viewBackgroundColor: appState?.viewBackgroundColor,
+        viewModeEnabled: appState?.viewModeEnabled,
+        zenModeEnabled: appState?.zenModeEnabled,
+        zoom: appState?.zoom,
       };
       onSave(elements, partialState, files);
     } else {
@@ -188,20 +194,23 @@ export default function ExcalidrawModal({
         onClose={() => {
           setDiscardModalOpen(false);
         }}
-        closeOnClickOutside={false}>
+        closeOnClickOutside={false}
+      >
         Are you sure you want to discard the changes?
         <div className="ExcalidrawModal__discardModal">
           <Button
             onClick={() => {
               setDiscardModalOpen(false);
               onClose();
-            }}>
+            }}
+          >
             Discard
           </Button>{' '}
           <Button
             onClick={() => {
               setDiscardModalOpen(false);
-            }}>
+            }}
+          >
             Cancel
           </Button>
         </div>
@@ -216,7 +225,7 @@ export default function ExcalidrawModal({
   const onChange = (
     els: ReadonlyArray<ExcalidrawElementFragment>,
     _: AppState,
-    fls: BinaryFiles,
+    fls: BinaryFiles
   ) => {
     setElements(els);
     setFiles(fls);
@@ -227,14 +236,16 @@ export default function ExcalidrawModal({
       <div
         className="ExcalidrawModal__modal"
         ref={excaliDrawModelRef}
-        tabIndex={-1}>
+        tabIndex={-1}
+      >
         <div className="ExcalidrawModal__row">
           {discardModalOpen && <ShowDiscardDialog />}
           <Excalidraw
             onChange={onChange}
             excalidrawAPI={excalidrawAPIRefCallback}
             initialData={{
-              appState: initialAppState || {isLoading: false},
+              appState: initialAppState || { isLoading: false },
+              //@ts-ignore
               elements: initialElements,
               files: initialFiles,
             }}
@@ -250,6 +261,6 @@ export default function ExcalidrawModal({
         </div>
       </div>
     </div>,
-    document.body,
+    document.body
   );
 }

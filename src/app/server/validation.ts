@@ -6,7 +6,7 @@
  *
  */
 
-import {createHeadlessEditor} from '@lexical/headless';
+import {createHeadlessEditor} from './headless';
 import {$isMarkNode, $unwrapMarkNode} from '@lexical/mark';
 import * as http from 'http';
 import {$getRoot, $isElementNode, LexicalNode} from 'lexical';
@@ -19,7 +19,9 @@ const port = 1235;
 
 let stringifiedEditorStateJSON = '';
 
-global.__DEV__ = true;
+
+
+(globalThis as any).__DEV__ = true;
 
 const editor = createHeadlessEditor({
   namespace: 'validation',

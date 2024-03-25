@@ -54,6 +54,8 @@ import {
 export const INSERT_COLLAPSIBLE_COMMAND = createCommand<void>();
 export const TOGGLE_COLLAPSIBLE_COMMAND = createCommand<NodeKey>();
 
+
+
 export default function CollapsiblePlugin(): null {
   const [editor] = useLexicalComposerContext();
 
@@ -194,6 +196,7 @@ export default function CollapsiblePlugin(): null {
             return false;
           }
 
+          // @ts-ignore
           const container = topLevelElement.getPreviousSibling<LexicalNode>();
           if (!$isCollapsibleContainerNode(container) || container.getOpen()) {
             return false;
