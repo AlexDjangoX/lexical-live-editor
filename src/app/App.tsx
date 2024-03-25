@@ -27,6 +27,7 @@ import TestRecorderPlugin from './plugins/TestRecorderPlugin';
 import TypingPerfPlugin from './plugins/TypingPerfPlugin';
 import Settings from './Settings';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
+import { Room } from './Room';
 
 console.warn(
   'If you are profiling the playground app, please ensure you turn off the debug view. You can disable it by pressing on the settings control in the bottom-left of your screen and toggling the debug view setting.'
@@ -121,8 +122,8 @@ function App(): JSX.Element {
     editorState: isCollab
       ? null
       : emptyEditor
-      ? undefined
-      : prepopulatedRichText,
+        ? undefined
+        : prepopulatedRichText,
     namespace: 'Playground',
     nodes: [...PlaygroundNodes],
     onError: (error: Error) => {
@@ -142,7 +143,9 @@ function App(): JSX.Element {
               </a>
             </header>
             <div className="editor-shell">
-              <Editor />
+              <Room>
+                <Editor />
+              </Room>
             </div>
             <Settings />
             {isDevPlayground ? <DocsPlugin /> : null}
