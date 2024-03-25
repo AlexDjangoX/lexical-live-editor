@@ -1,5 +1,15 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
 import '@/app/styles.css';
 import '@/app/globals.css';
 
@@ -15,9 +25,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth();
+
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <header className="h-[6rem] flex items-center justify-start bg-blue-200">
+            <SignedOut>
+              <div>{userId && <SignInButton />}</div>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header>
+          <main>{children}</main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,17 +1,58 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        red: {
+          DEFAULT: '#FF4401',
+          90: '#FF571A',
+          80: '#FF6934',
+          70: '#FF7C4D',
+          60: '#FF8F67',
+          10: '#FFECE6',
+          'black-40': '#661B00',
+          card: '#FF7C4D',
+        },
+        yellow: {
+          DEFAULT: '#EA942C',
+          90: '#EC9F41',
+          80: '#EEA956',
+          30: '#F9DFC0',
+          10: '#FDF4EA',
+        },
+        blue: {
+          DEFAULT: '#347AE2',
+          90: '#4887E5',
+          80: '#5D95E8',
+          20: '#D6E4F9',
+          10: '#EBF2FC',
+          'black-80': '#2A62B5',
+          'black-10': '#0A182D',
+        },
+        purple: {
+          DEFAULT: '#6570f7',
+          80: '#848DF9',
+          20: '#E0E2FD',
+          10: '#F0F1FE',
+          'black-20': '#141631',
+        },
+        green: {
+          DEFAULT: '#0ECC8D',
+          80: '#3ED6A4',
+          10: '#E7FAF4',
+        },
+        light: {
+          DEFAULT: '#FFFFFF',
+          2: '#F7F7F7',
+          3: '#F4F6F8',
+          4: '#7B8EC8',
+        },
       },
     },
   },
