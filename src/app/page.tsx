@@ -1,8 +1,16 @@
 'use client';
 
 import App from '@/app/App';
+
 import '@/app/styles.css';
+import { Room } from '@/app/Room';
 
 export default function Home() {
-  return <App />;
+  return (
+    <>
+      <Room>
+        <App />
+      </Room>
+    </>
+  );
 }
