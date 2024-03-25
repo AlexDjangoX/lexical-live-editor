@@ -28,6 +28,7 @@
     "@liveblocks/node": "^1.11.0",
     "@liveblocks/react": "^1.11.0",
     "@liveblocks/yjs": "^1.11.0",
+    "framer-motion": "^11.0.20",
     "katex": "^0.15.2",
     "lexical": "0.13.1",
     "lodash-es": "^4.17.21",

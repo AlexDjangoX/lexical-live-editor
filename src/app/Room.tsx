@@ -4,7 +4,7 @@ import { ReactNode, useMemo, Suspense } from 'react';
 import { RoomProvider } from './liveblocks.config';
 import { useSearchParams } from 'next/navigation';
 import { ClientSideSuspense } from '@liveblocks/react';
-import { Loading } from './components/Loading';
+import { Loading } from './components/loading/Loading';
 
 export function Room({ children }: { children: ReactNode }) {
   return (

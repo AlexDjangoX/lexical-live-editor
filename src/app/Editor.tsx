@@ -28,7 +28,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import * as Y from 'yjs';
-import { Avatars } from './components/Avatars';
+import { Avatars } from './components/avatars/Avatars';
 import LiveblocksProvider from '@liveblocks/yjs';
 import { useRoom, useSelf } from './liveblocks.config';
 import { Provider } from '@lexical/yjs';
