@@ -1,7 +1,13 @@
 import Buttons from '@/components/buttons/Buttons';
+import NounsForm from '@/components/nouns/NounsForm';
 
 const page = () => {
-  return <Buttons />;
+  return (
+    <>
+      <NounsForm />
+      <Buttons />
+    </>
+  );
 };
 
 export default page;

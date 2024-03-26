@@ -1,10 +1,30 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './nounsForm.module.css';
-import { createNoun, updateNounById } from '@/lib/actions/actions';
+import Image from 'next/image';
+import { createNoun, updateNounById } from '@/lib/actions';
+import { Button } from '@/components/ui/button';
+import { dummyNounData } from '../../../constants';
 
-const initialNounFormData = {
+interface Noun {
+  id?: number;
+  category: string;
+  polish_word: string;
+  english_word: string;
+  image_url: string;
+  notes: string;
+}
+
+interface NounsFormProps {
+  currentNoun: Noun;
+  setCurrentNoun: React.Dispatch<React.SetStateAction<Noun>>;
+  isEditing: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  nounsToRender: Noun[];
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const initialNounFormData: Noun = {
   category: '',
   polish_word: '',
   english_word: '',
@@ -12,7 +32,7 @@ const initialNounFormData = {
   notes: '',
 };
 
-const NounsForm = ({
+const NounsForm: React.FC<NounsFormProps> = ({
   currentNoun,
   setCurrentNoun,
   isEditing,
@@ -20,166 +40,174 @@ const NounsForm = ({
   nounsToRender,
   setOpen,
 }) => {
-  const [newNoun, setNewNoun] = useState({ ...initialNounFormData });
-  const categories = nounsToRender
+  const [newNoun, setNewNoun] = useState<Noun>({ ...currentNoun });
+  const [newCategory, setNewCategory] = useState('');
+
+  const categories = dummyNounData
     .map((item) => item.category)
     .filter((category, index, self) => self.indexOf(category) === index);
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const focusOnNounEntry = () => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   useEffect(() => {
     focusOnNounEntry();
   }, []);
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     event.preventDefault();
     const { name, value } = event.target;
 
-    const processedValue =
-      name === 'category'
-        ? value.charAt(0).toUpperCase() + value.slice(1)
-        : value;
-
-    if (isEditing) {
-      setCurrentNoun((previous) => ({
-        ...previous,
-        [name]: processedValue,
-      }));
+    if (name === 'newCategory') {
+      setNewCategory(value);
     } else {
+      const processedValue = name === 'category' ? value : value;
+
       setNewNoun({ ...newNoun, [name]: processedValue });
+
+      if (name === 'category') {
+        setNewCategory(value);
+      }
     }
   };
 
-  const createNewNoun = async () => {
-    await createNoun(newNoun);
-    setNewNoun({ ...initialNounFormData });
-    setOpen(false);
-  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const updateNoun = async () => {
-    try {
-      if (isEditing) {
-        await updateNounById(currentNoun.id, currentNoun);
+    if (isEditing) {
+      try {
+        if (currentNoun.id) {
+          await updateNounById(currentNoun.id, newNoun);
+        }
+        setOpen(false);
+        setIsEditing(false);
+      } catch (error) {
+        console.error('Error updating noun:', error);
       }
+    } else {
+      await createNoun(newNoun);
+      setNewNoun({ ...initialNounFormData });
       setOpen(false);
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating noun:', error);
     }
   };
 
   return (
-    <>
-      <div className={styles['form-wrapper']}>
-        <form onSubmit={createNewNoun}>
-          <div className={styles['noun-form-input-wrapper']}>
-            {isEditing && (
-              <div className={styles['close-modal-button']}>
-                <button onClick={updateNoun}>
-                  {isEditing ? 'Update Noun' : 'Editing'}
-                </button>
-              </div>
-            )}
-            <div className={styles['noun-form-input-category']}>
-              <label htmlFor="category">Category</label>
-              <select
-                name="category"
-                defaultValue={
-                  isEditing ? currentNoun.category : newNoun.category
-                }
-                onChange={handleChange}
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles['noun-form-input-new-category']}>
-              <label htmlFor="newCategory">New Category</label>
-              <input
-                type="text"
-                name="category"
-                defaultValue={
-                  isEditing ? currentNoun.category : newNoun.category
-                }
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles['noun-form-input-english-word']}>
-              <label htmlFor="english_word">English</label>
-              <input
-                placeholder="English"
-                id="english_word"
-                type="text"
-                name="english_word"
-                required
-                onChange={handleChange}
-                defaultValue={
-                  isEditing ? currentNoun.english_word : newNoun.word
-                }
-              />
-            </div>
-            <div className={styles['noun-form-input-polish-word']}>
-              <label htmlFor="polish_word">Polish</label>
-              <input
-                ref={inputRef}
-                placeholder="Polish"
-                id="polish_word"
-                type="text"
-                name="polish_word"
-                required
-                onChange={handleChange}
-                defaultValue={
-                  isEditing ? currentNoun.polish_word : newNoun.word
-                }
-              />
-            </div>
-            <div className={styles['noun-form-input-image']}>
-              <label htmlFor="image_url">Image URL</label>
-              <input
-                placeholder="Image URL"
-                id="image_url"
-                type="text"
-                name="image_url"
-                required
-                onChange={handleChange}
-                defaultValue={
-                  isEditing ? currentNoun.image_url : newNoun.image_url
-                }
-              />
-            </div>
-
-            <div className={styles['noun-form-input-notes']}>
-              <label htmlFor="notes">Your notes</label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows="4"
-                cols="50"
-                placeholder={`Create a few sentences using the noun.`}
-                fontFamily="Work sans"
-                fontSize="28px"
-                onChange={handleChange}
-                value={isEditing ? currentNoun.notes : newNoun.notes}
-              />
-            </div>
-            {!isEditing && (
-              <div className={styles['create-noun-submit-button']}>
-                <button id="submit-verb-button" type="submit">
-                  Create
-                </button>
-              </div>
-            )}
-          </div>
-        </form>
+    <div className="mx-auto shadow-formContainer relative max-w-[450px] w-full rounded-3xl p-12 bg-[#ecf0f3]">
+      <Image
+        src="https://tse2.mm.bing.net/th/id/OIG2.8sm7UoAuUTARlhnvdtq.?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn"
+        alt="logo"
+        height={100}
+        width={100}
+        className="mx-auto  rounded-full shadow-brandLogo"
+      />
+      <div className="py-4 font-extrabold text-[1.8rem] text-center text-[#1da1f2]">
+        NOUNS
       </div>
-    </>
+      <form onSubmit={handleSubmit}>
+        <div className="flex w-full max-w-[600px] flex-col">
+          {isEditing && (
+            <div className="px-6 py-6">
+              <Button size="full" variant="secondary" type="submit">
+                Update Noun
+              </Button>
+            </div>
+          )}
+          <div className="flex flex-col">
+            <label className="py-2" htmlFor="category">
+              Category
+            </label>
+            <select
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-lg"
+              name="category"
+              value={newNoun.category}
+              onChange={handleChange}
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <label className="flex justify-start py-2 pl-2">New Category</label>
+            <input
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-3xl focus:outline-none focus:ring-1 focus:ring-gray-600"
+              type="text"
+              name="newCategory"
+              placeholder="New Category"
+              onChange={handleChange}
+              value={newCategory}
+            />
+            <label className="flex justify-start py-2 pl-2">English</label>
+            <input
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-3xl focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="English"
+              id="english_word"
+              type="text"
+              name="english_word"
+              required
+              onChange={handleChange}
+              value={newNoun.english_word}
+            />
+            <label className="flex justify-start py-2 pl-2">Polish</label>
+            <input
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-3xl focus:outline-none focus:ring-1 focus:ring-gray-600"
+              ref={inputRef}
+              placeholder="Polish"
+              id="polish_word"
+              type="text"
+              name="polish_word"
+              required
+              onChange={handleChange}
+              value={newNoun.polish_word}
+            />
+            <label className="flex justify-start py-2 pl-2">Image URL</label>
+            <input
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-3xl focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="Image URL"
+              id="image_url"
+              type="text"
+              name="image_url"
+              required
+              onChange={handleChange}
+              value={newNoun.image_url}
+            />
+            <label className="flex justify-start py-2 pl-2">Your notes</label>
+            <textarea
+              className="mt-2 mb-4  shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-36 text-md rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600"
+              id="notes"
+              name="notes"
+              placeholder={`Create a few sentences using the noun.`}
+              onChange={handleChange}
+              value={newNoun.notes}
+            />
+          </div>
+
+          {!isEditing && (
+            <div className="flex justify-center items-center pt-4 w-full">
+              <Button
+                size="full"
+                variant="primary"
+                id="submit-verb-button"
+                type="submit"
+              >
+                Create
+              </Button>
+            </div>
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
 
