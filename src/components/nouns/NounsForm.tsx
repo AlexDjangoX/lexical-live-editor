@@ -126,13 +126,17 @@ const NounsForm: React.FC<NounsFormProps> = ({
               Category
             </label>
             <select
-              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-lg"
+              className="shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-12 text-md rounded-lg "
               name="category"
               value={newNoun.category}
               onChange={handleChange}
             >
               {categories.map((category) => (
-                <option key={category} value={category}>
+                <option
+                  key={category}
+                  value={category}
+                  className="bg-[#1da1f2]"
+                >
                   {category}
                 </option>
               ))}
@@ -184,7 +188,7 @@ const NounsForm: React.FC<NounsFormProps> = ({
             />
             <label className="flex justify-start py-2 pl-2">Your notes</label>
             <textarea
-              className="mt-2 mb-4  shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-36 text-md rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="mt-2 custom-scrollbar mb-4 resize-none shadow-formInput bg-[#ecf0f3] p-3 pl-6 h-36 text-md rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600"
               id="notes"
               name="notes"
               placeholder={`Create a few sentences using the noun.`}

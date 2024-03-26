@@ -8,6 +8,18 @@
   text-align: center;
 }
 
+textarea.custom-scrollbar::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+textarea.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+
+textarea.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-400;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
