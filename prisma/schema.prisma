@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  }
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  clerkId   String   @unique
+  fullName  String?
+  username  String   @unique
+  email     String   @unique
+  profileImage String?
+  role      Role     @default(USER)
+  profile   Profile?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  kanban    Kanban?   
+  verbs     Verb[]   
+  noun          Noun[]
+}
+
+model Kanban {
+  id           Int      @id @default(autoincrement())
+  kanbanObject Json?
+  clerkId      String   @unique
+  user         User     @relation(fields: [clerkId], references: [clerkId])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  verbKanban   VerbKanban[] 
+}
+
+model Verb {
+  id         Int      @id @default(autoincrement())
+  verbObject Json?
+  clerkId    String  
+  user       User     @relation(fields: [clerkId], references: [clerkId])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  verbKanban VerbKanban[] 
+}
+
+model Noun {
+  id            Int           @id @default(autoincrement())
+  category      String
+  polish_word   String
+  english_word  String
+  image_url     String
+  notes         String
+  clerkId       String
+  user          User     @relation(fields: [clerkId], references: [clerkId])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model VerbKanban {
+  id         Int      @id @default(autoincrement())
+  kanbanId   Int
+  verbId     Int
+  kanban     Kanban   @relation(fields: [kanbanId], references: [id])
+  verb       Verb     @relation(fields: [verbId], references: [id])
+
+  @@unique([kanbanId, verbId])
+}
+
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  clerkId   String   @unique
+  user      User     @relation(fields: [clerkId], references: [clerkId])
+  name      String?
+  nickname  String?
+  bio       String?
+  picture   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
