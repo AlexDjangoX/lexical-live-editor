@@ -5,14 +5,17 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs';
+import { Source_Sans_3 as SourceSans3 } from 'next/font/google';
 import { auth } from '@clerk/nextjs/server';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
 import '@/app/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = SourceSans3({
+  subsets: ['latin'],
+  variable: '--font-source-sans',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -29,7 +32,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={font.className}>
           <header className="h-[6rem] flex items-center justify-start bg-blue-200">
             <SignedOut>
               <div>{userId && <SignInButton />}</div>

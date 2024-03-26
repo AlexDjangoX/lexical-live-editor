@@ -18,10 +18,15 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sourceSans: ['var(--font-source-sans)'],
+      },
       boxShadow: {
         formContainer: '14px 14px 20px #cbced1, -14px -14px 20px white',
         formInput: 'inset 6px 6px 6px #cbced1, inset -6px -6px 6px white',
         brandLogo: ' 7px 7px 10px #cbced1,-7px -7px 10px white',
+        nounCard:
+          ' inset 0 0 15px rgba(55, 84, 170,0), inset 0 0 20px rgba(255, 255, 255,0), 7px 7px 15px rgba(55, 84, 170,.15),-7px -7px 20px rgba(255, 255, 255,1),inset 0px 0px 4px rgba(255, 255, 255,.2)',
       },
       backgroundImage: {
         'branded-logo': "url('public/logo.jpeg')",

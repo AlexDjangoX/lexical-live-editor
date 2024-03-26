@@ -198,7 +198,7 @@ const NounsForm: React.FC<NounsFormProps> = ({
           </div>
 
           {!isEditing && (
-            <div className="flex justify-center items-center pt-4 w-full">
+            <div className="flex justify-center items-center mb-8 pt-4 w-full">
               <Button
                 size="full"
                 variant="primary"
