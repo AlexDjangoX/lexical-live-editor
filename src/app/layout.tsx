@@ -10,7 +10,6 @@ import { auth } from '@clerk/nextjs/server';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import '@/app/styles.css';
 import '@/app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
