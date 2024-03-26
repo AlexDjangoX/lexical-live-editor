@@ -38,11 +38,11 @@ import {
   InlineImageNode,
   InlineImagePayload,
 } from '../../nodes/InlineImageNode';
-import Button from '../../ui/Button';
-import { DialogActions } from '../../ui/Dialog';
-import FileInput from '../../ui/FileInput';
-import Select from '../../ui/Select';
-import TextInput from '../../ui/TextInput';
+import Button from '../../lexical-ui/Button';
+import { DialogActions } from '../../lexical-ui/Dialog';
+import FileInput from '../../lexical-ui/FileInput';
+import Select from '../../lexical-ui/Select';
+import TextInput from '../../lexical-ui/TextInput';
 import { CAN_USE_DOM } from '@/app/shared/canUseDom';
 
 export type InsertInlineImagePayload = Readonly<InlineImagePayload>;
@@ -334,8 +334,8 @@ function getDragSelection(event: DragEvent): Range | null | undefined {
     target == null
       ? null
       : target.nodeType === 9
-      ? (target as Document).defaultView
-      : (target as Element).ownerDocument.defaultView;
+        ? (target as Document).defaultView
+        : (target as Element).ownerDocument.defaultView;
   const domSelection = getDOMSelection(targetWindow);
   if (document.caretRangeFromPoint) {
     range = document.caretRangeFromPoint(event.clientX, event.clientY);

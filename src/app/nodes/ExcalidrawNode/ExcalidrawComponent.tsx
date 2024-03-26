@@ -27,7 +27,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as React from 'react';
 
-import ImageResizer from '../../ui/ImageResizer';
+import ImageResizer from '../../lexical-ui/ImageResizer';
 import { $isExcalidrawNode } from '.';
 import ExcalidrawImage from './ExcalidrawImage';
 import ExcalidrawModal from './ExcalidrawModal';

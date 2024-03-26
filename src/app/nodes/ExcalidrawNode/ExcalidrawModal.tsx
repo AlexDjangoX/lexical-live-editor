@@ -24,8 +24,8 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
-import Button from '../../ui/Button';
-import Modal from '../../ui/Modal';
+import Button from '../../lexical-ui/Button';
+import Modal from '../../lexical-ui/Modal';
 
 export type ExcalidrawElementFragment = {
   isDeleted?: boolean;

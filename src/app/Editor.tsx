@@ -75,8 +75,8 @@ import ToolbarPlugin from './plugins/ToolbarPlugin';
 import TreeViewPlugin from './plugins/TreeViewPlugin';
 import TwitterPlugin from './plugins/TwitterPlugin';
 import YouTubePlugin from './plugins/YouTubePlugin';
-import ContentEditable from './ui/ContentEditable';
-import Placeholder from './ui/Placeholder';
+import ContentEditable from './lexical-ui/ContentEditable';
+import Placeholder from './lexical-ui/Placeholder';
 import { CAN_USE_DOM } from './shared/canUseDom';
 
 import {

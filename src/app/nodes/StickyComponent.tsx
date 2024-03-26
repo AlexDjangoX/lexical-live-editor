@@ -26,8 +26,8 @@ import { useEffect, useRef } from 'react';
 import { createWebsocketProvider } from '../collaboration';
 import { useSharedHistoryContext } from '../context/SharedHistoryContext';
 import StickyEditorTheme from '../themes/StickyEditorTheme';
-import ContentEditable from '../ui/ContentEditable';
-import Placeholder from '../ui/Placeholder';
+import ContentEditable from '../lexical-ui/ContentEditable';
+import Placeholder from '../lexical-ui/Placeholder';
 import { $isStickyNode } from './StickyNode';
 
 type Positioning = {

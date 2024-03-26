@@ -27,9 +27,9 @@ import {
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
 
-import Button from '../ui/Button';
-import { DialogActions } from '../ui/Dialog';
-import TextInput from '../ui/TextInput';
+import Button from '../lexical-ui/Button';
+import { DialogActions } from '../lexical-ui/Dialog';
+import TextInput from '../lexical-ui/TextInput';
 import invariant from '../shared/invariant';
 
 export type InsertTableCommandPayload = Readonly<{

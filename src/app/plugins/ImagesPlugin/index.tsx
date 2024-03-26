@@ -39,10 +39,10 @@ import {
   ImageNode,
   ImagePayload,
 } from '../../nodes/ImageNode';
-import Button from '../../ui/Button';
-import { DialogActions, DialogButtonsList } from '../../ui/Dialog';
-import FileInput from '../../ui/FileInput';
-import TextInput from '../../ui/TextInput';
+import Button from '../../lexical-ui/Button';
+import { DialogActions, DialogButtonsList } from '../../lexical-ui/Dialog';
+import FileInput from '../../lexical-ui/FileInput';
+import TextInput from '../../lexical-ui/TextInput';
 import { CAN_USE_DOM } from '@/app/shared/canUseDom';
 
 export type InsertImagePayload = Readonly<ImagePayload>;
@@ -389,8 +389,8 @@ function getDragSelection(event: DragEvent): Range | null | undefined {
     target == null
       ? null
       : target.nodeType === 9
-      ? (target as Document).defaultView
-      : (target as Element).ownerDocument.defaultView;
+        ? (target as Document).defaultView
+        : (target as Element).ownerDocument.defaultView;
   const domSelection = getDOMSelection(targetWindow);
   if (document.caretRangeFromPoint) {
     range = document.caretRangeFromPoint(event.clientX, event.clientY);

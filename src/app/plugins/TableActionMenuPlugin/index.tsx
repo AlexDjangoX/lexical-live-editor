@@ -45,7 +45,7 @@ import { ReactPortal, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import useModal from '../../hooks/useModal';
-import ColorPicker from '../../ui/ColorPicker';
+import ColorPicker from '../../lexical-ui/ColorPicker';
 import invariant from '@/app/shared/invariant';
 
 function computeSelectionCount(selection: TableSelection): {

@@ -76,8 +76,8 @@ import * as React from 'react';
 import useModal from '../../hooks/useModal';
 import catTypingGif from '../../images/cat-typing.gif';
 import { $createStickyNode } from '../../nodes/StickyNode';
-import DropDown, { DropDownItem } from '../../ui/DropDown';
-import DropdownColorPicker from '../../ui/DropdownColorPicker';
+import DropDown, { DropDownItem } from '../../lexical-ui/DropDown';
+import DropdownColorPicker from '../../lexical-ui/DropdownColorPicker';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { sanitizeUrl } from '../../utils/url';
 import { EmbedConfigs } from '../AutoEmbedPlugin';
@@ -665,8 +665,8 @@ export default function ToolbarPlugin({
         $isElementNode(matchingParent)
           ? matchingParent.getFormatType()
           : $isElementNode(node)
-          ? node.getFormatType()
-          : parent?.getFormatType() || 'left'
+            ? node.getFormatType()
+            : parent?.getFormatType() || 'left'
       );
     }
   }, [activeEditor]);

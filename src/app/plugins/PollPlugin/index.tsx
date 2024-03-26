@@ -6,8 +6,8 @@
  *
  */
 
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$wrapNodeInElement} from '@lexical/utils';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $wrapNodeInElement } from '@lexical/utils';
 import {
   $createParagraphNode,
   $insertNodes,
@@ -17,7 +17,7 @@ import {
   LexicalCommand,
   LexicalEditor,
 } from 'lexical';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 
 import {
@@ -25,12 +25,12 @@ import {
   createPollOption,
   PollNode,
 } from '../../nodes/PollNode';
-import Button from '../../ui/Button';
-import {DialogActions} from '../../ui/Dialog';
-import TextInput from '../../ui/TextInput';
+import Button from '../../lexical-ui/Button';
+import { DialogActions } from '../../lexical-ui/Dialog';
+import TextInput from '../../lexical-ui/TextInput';
 
 export const INSERT_POLL_COMMAND: LexicalCommand<string> = createCommand(
-  'INSERT_POLL_COMMAND',
+  'INSERT_POLL_COMMAND'
 );
 
 export function InsertPollDialog({
@@ -80,7 +80,7 @@ export default function PollPlugin(): JSX.Element | null {
 
         return true;
       },
-      COMMAND_PRIORITY_EDITOR,
+      COMMAND_PRIORITY_EDITOR
     );
   }, [editor]);
   return null;
