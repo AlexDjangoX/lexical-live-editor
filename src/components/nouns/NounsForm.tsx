@@ -40,7 +40,6 @@ const NounsForm: React.FC<NounsFormProps> = ({
 }) => {
   const [newNoun, setNewNoun] = useState<Partial<Noun>>({ ...currentNoun });
   const [newCategory, setNewCategory] = useState('');
-  console.log(currentNoun);
   const categories = dummyNounData
     .map((item) => item.category)
     .filter((category, index, self) => self.indexOf(category) === index);

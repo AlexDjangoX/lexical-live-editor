@@ -2496,93 +2496,103 @@ export const dummyNounData = [
 
 export const cardDetails = [
   {
-    imageSrcFront:
+    id: 1,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.Qhbva8Hpc50cfjPdDNFj?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 2,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse3.mm.bing.net/th/id/OIG1.CVqzbVyYnVGkh3B1oYFf?pid=ImgGn',
-    imageSourceBack:
-      'https://tse1.mm.bing.net/th/id/OIG1.380HcIQaNpA3tQhjYrNE?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 3,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse2.mm.bing.net/th/id/OIG1.xNqL00LZfcGdmtXTCr1U?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.Qhbva8Hpc50cfjPdDNFj?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 4,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse1.mm.bing.net/th/id/OIG1.SdAx46tDvFTwWjM7Fodu?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG1.LunCiFj9OGFh9topeg7T?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 5,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.QUtDf.yTTliIUYhDPUK4?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 6,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse3.mm.bing.net/th/id/OIG1.cRV1N32kycMIX9IgdGXf?pid=ImgGn',
-    imageSourceBack:
-      'https://tse3.mm.bing.net/th/id/OIG3.VrUU3jYqVy3cjIywo_Qp?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 7,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG3.8q8yRty.vdXvbxjfHcP5?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 8,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse3.mm.bing.net/th/id/OIG3.PilrxhRb7BVLXaeADNo6?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 9,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse1.mm.bing.net/th/id/OIG3.ayulI85jAoVqZSTS6.Z6?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG4.S.QJeiNsYCjkvaApqHQ8?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
   {
-    imageSrcFront:
+    id: 10,
+    category: 'cats',
+    polish_word: 'kot',
+    english_word: 'cat',
+    image_url:
       'https://tse1.mm.bing.net/th/id/OIG3.rPSs09pFq2_jtPXpSD8Z?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG4.S.QJeiNsYCjkvaApqHQ8?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
+    notes:
       'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
   },
 ];

@@ -75,7 +75,6 @@ const CardFlip = () => {
   };
 
   const handleEditNoun = (noun: Noun, index: number) => {
-    console.log(noun);
     setEditingNoun(noun);
     setIsEditing(true);
     setActiveIndex(index);
@@ -96,6 +95,9 @@ const CardFlip = () => {
     flipped: { rotateY: 180 },
     unflipped: { rotateY: 0 },
   };
+
+  console.log(cardDetails[0]);
+
   return (
     <>
       <Drawer open={open} onOpenChange={setOpen}>
@@ -135,7 +137,7 @@ const CardFlip = () => {
                 transition={{ duration: 0.6 }}
               >
                 <Image
-                  src={card.imageSrcFront}
+                  src={card.image_url}
                   alt="word-image"
                   layout="fill"
                   objectFit="fit"
@@ -151,12 +153,10 @@ const CardFlip = () => {
               >
                 <div className="flex flex-col mt-4 items-center justify-normal">
                   <h3 className="justify-start w-fit shadow-formInput p-3  rounded-lg font-semiBold flex text-md border-2 text-gray-900">
-                    {card.mainHeading}
+                    {card.polish_word}
                   </h3>
                   <div className="flex shadow-formInput p-3 mx-4 rounded-lg mt-8 center-text items-center justify-center text-gray-900">
-                    <p className="leading-[1.45rem] text-left">
-                      {card.description}
-                    </p>
+                    <p className="leading-[1.45rem] text-left">{card.notes}</p>
                   </div>
                   {activeIndex === index && (
                     <div className="flex p-2 justify-between w-full py-2 px-8">
