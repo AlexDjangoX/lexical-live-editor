@@ -4,119 +4,60 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-import { BarChart, Minus, Plus } from 'lucide-react';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import NounsForm from '@/components/nouns/NounsForm';
-
-const cardDetails = [
-  {
-    imageSrcFront:
-      'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.Qhbva8Hpc50cfjPdDNFj?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse3.mm.bing.net/th/id/OIG1.CVqzbVyYnVGkh3B1oYFf?pid=ImgGn',
-    imageSourceBack:
-      'https://tse1.mm.bing.net/th/id/OIG1.380HcIQaNpA3tQhjYrNE?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse2.mm.bing.net/th/id/OIG1.xNqL00LZfcGdmtXTCr1U?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.Qhbva8Hpc50cfjPdDNFj?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse1.mm.bing.net/th/id/OIG1.SdAx46tDvFTwWjM7Fodu?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG1.LunCiFj9OGFh9topeg7T?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG1.QUtDf.yTTliIUYhDPUK4?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse3.mm.bing.net/th/id/OIG1.cRV1N32kycMIX9IgdGXf?pid=ImgGn',
-    imageSourceBack:
-      'https://tse3.mm.bing.net/th/id/OIG3.VrUU3jYqVy3cjIywo_Qp?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse2.mm.bing.net/th/id/OIG3.8q8yRty.vdXvbxjfHcP5?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
-    imageSourceBack:
-      'https://tse3.mm.bing.net/th/id/OIG3.PilrxhRb7BVLXaeADNo6?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse1.mm.bing.net/th/id/OIG3.ayulI85jAoVqZSTS6.Z6?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG4.S.QJeiNsYCjkvaApqHQ8?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-  {
-    imageSrcFront:
-      'https://tse1.mm.bing.net/th/id/OIG3.rPSs09pFq2_jtPXpSD8Z?pid=ImgGn',
-    imageSourceBack:
-      'https://tse4.mm.bing.net/th/id/OIG4.S.QJeiNsYCjkvaApqHQ8?pid=ImgGn',
-    mainHeading: 'The King of Cats',
-    description:
-      'Cats are not only adorable but also therapeutic companions, reducing stress and anxiety for those who spend time with them. Whether it’s their adorable faces, tiny paws, or their playful antics, cats bring joy and warmth to our lives. ',
-  },
-];
+import { deleteNounById, updateNounById } from '@/lib/actions';
+import { cardDetails } from '../../../constants';
+import { Noun } from '@prisma/client';
 
 const CardFlip = () => {
   const [isFlipped, setIsFlipped] = useState(
     Array(cardDetails.length).fill(false)
   );
 
+  const [deleteNoun, setDeleteNoun] = useState(
+    Array(cardDetails.length).fill(false)
+  );
+
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [editingNoun, setEditingNoun] = useState<Partial<Noun> | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const onPrepareToDelete = (index: number) => {
+    setDeleteNoun((prev) => {
+      const copy = [...prev];
+      copy[index] = true;
+      return copy;
+    });
+  };
+
+  const onCancelDelete = (index: number) => {
+    setDeleteNoun((prev) => {
+      const copy = [...prev];
+      copy[index] = false;
+      return copy;
+    });
+  };
+
+  console.log(activeIndex);
+
+  const onConfirmDelete = async (index: number) => {
+    try {
+      await deleteNounById(index);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleMouseEnter = (index: number) => {
+    setActiveIndex(index);
     setIsFlipped((prev) => {
       const copy = [...prev];
       copy[index] = true;
@@ -125,6 +66,7 @@ const CardFlip = () => {
   };
 
   const handleMouseLeave = (index: number) => {
+    setActiveIndex(-1);
     setIsFlipped((prev) => {
       const copy = [...prev];
       copy[index] = false;
@@ -132,14 +74,31 @@ const CardFlip = () => {
     });
   };
 
+  const handleEditNoun = (noun: Noun, index: number) => {
+    console.log(noun);
+    setEditingNoun(noun);
+    setIsEditing(true);
+    setActiveIndex(index);
+    setOpen(true);
+  };
+
+  const handleFormSubmit = async ({
+    updatedData,
+  }: {
+    updatedData: Partial<Noun>;
+  }) => {
+    if (editingNoun && editingNoun.id !== undefined) {
+      await updateNounById(editingNoun.id, updatedData);
+    }
+    setEditingNoun(null);
+  };
   const variants = {
     flipped: { rotateY: 180 },
     unflipped: { rotateY: 0 },
   };
-
   return (
     <>
-      <Drawer>
+      <Drawer open={open} onOpenChange={setOpen}>
         <div className="flex justify-center p-4">
           <DrawerTrigger asChild>
             <Button variant="secondary">Add Noun</Button>
@@ -147,7 +106,12 @@ const CardFlip = () => {
         </div>
         <DrawerContent className="custom-scrollbar overflow-scroll">
           <div className="relative">
-            <NounsForm />
+            <NounsForm
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              currentNoun={editingNoun}
+              onSubmit={handleFormSubmit}
+            />
             <DrawerClose className="absolute inset-x-0 bottom-4 w-full flex justify-center">
               <Button>Cancel</Button>
             </DrawerClose>
@@ -159,7 +123,7 @@ const CardFlip = () => {
           return (
             <div
               key={index}
-              className="w-[300px] h-[300px] relative cursor-pointer"
+              className="w-[300px] h-[350px] relative cursor-pointer"
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
             >
@@ -194,6 +158,41 @@ const CardFlip = () => {
                       {card.description}
                     </p>
                   </div>
+                  {activeIndex === index && (
+                    <div className="flex p-2 justify-between w-full py-2 px-8">
+                      {!deleteNoun[index] ? (
+                        <Button
+                          variant="danger"
+                          onClick={() => onPrepareToDelete(index)}
+                        >
+                          Delete
+                        </Button>
+                      ) : (
+                        <>
+                          <Button
+                            variant="danger"
+                            onClick={() => onCancelDelete(index)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            onClick={() => onConfirmDelete(index)}
+                          >
+                            Confirm
+                          </Button>
+                        </>
+                      )}
+                      {!deleteNoun[index] && (
+                        <Button
+                          variant="secondary"
+                          onClick={() => handleEditNoun(card, index)}
+                        >
+                          Edit
+                        </Button>
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </div>

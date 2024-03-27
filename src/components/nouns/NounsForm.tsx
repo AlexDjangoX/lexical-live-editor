@@ -16,7 +16,7 @@ interface Noun {
 }
 
 interface NounsFormProps {
-  currentNoun: Noun;
+  currentNoun: Partial<Noun> | null;
   setCurrentNoun: React.Dispatch<React.SetStateAction<Noun>>;
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,15 +34,13 @@ const initialNounFormData: Noun = {
 
 const NounsForm: React.FC<NounsFormProps> = ({
   currentNoun,
-  setCurrentNoun,
   isEditing,
   setIsEditing,
-  nounsToRender,
   setOpen,
 }) => {
-  const [newNoun, setNewNoun] = useState<Noun>({ ...currentNoun });
+  const [newNoun, setNewNoun] = useState<Partial<Noun>>({ ...currentNoun });
   const [newCategory, setNewCategory] = useState('');
-
+  console.log(currentNoun);
   const categories = dummyNounData
     .map((item) => item.category)
     .filter((category, index, self) => self.indexOf(category) === index);
@@ -58,6 +56,10 @@ const NounsForm: React.FC<NounsFormProps> = ({
   useEffect(() => {
     focusOnNounEntry();
   }, []);
+
+  useEffect(() => {
+    setNewNoun({ ...currentNoun });
+  }, [currentNoun]);
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -135,7 +137,7 @@ const NounsForm: React.FC<NounsFormProps> = ({
                 <option
                   key={category}
                   value={category}
-                  className="bg-[#1da1f2]"
+                  className="bg-[#1da1f2]/90"
                 >
                   {category}
                 </option>
