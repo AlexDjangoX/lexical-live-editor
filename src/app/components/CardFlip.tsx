@@ -12,9 +12,12 @@ import {
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import NounsForm from '@/components/nouns/NounsForm';
-import { deleteNounById, updateNounById } from '@/lib/actions';
-import { cardDetails } from '../../../constants';
+import { deleteNounById } from '@/lib/actions';
 import { Noun } from '@prisma/client';
+
+import { cardDetails } from '../../../constants';
+
+type NewNoun = Omit<Noun, 'clerkId' | 'createdAt' | 'updatedAt'>;
 
 const CardFlip = () => {
   const [isFlipped, setIsFlipped] = useState(
@@ -74,23 +77,13 @@ const CardFlip = () => {
     });
   };
 
-  const handleEditNoun = (noun: Noun, index: number) => {
+  const handleEditNoun = (noun: NewNoun, index: number) => {
     setEditingNoun(noun);
     setIsEditing(true);
     setActiveIndex(index);
     setOpen(true);
   };
 
-  const handleFormSubmit = async ({
-    updatedData,
-  }: {
-    updatedData: Partial<Noun>;
-  }) => {
-    if (editingNoun && editingNoun.id !== undefined) {
-      await updateNounById(editingNoun.id, updatedData);
-    }
-    setEditingNoun(null);
-  };
   const variants = {
     flipped: { rotateY: 180 },
     unflipped: { rotateY: 0 },
@@ -112,7 +105,7 @@ const CardFlip = () => {
               isEditing={isEditing}
               setIsEditing={setIsEditing}
               currentNoun={editingNoun}
-              onSubmit={handleFormSubmit}
+              setOpen={setOpen}
             />
             <DrawerClose className="absolute inset-x-0 bottom-4 w-full flex justify-center">
               <Button>Cancel</Button>
@@ -121,7 +114,7 @@ const CardFlip = () => {
         </DrawerContent>
       </Drawer>
       <div className="flex h-full bg-[#f1f3f6] flex-wrap justify-center gap-12 p-4">
-        {cardDetails.map((card, index) => {
+        {cardDetails.map((noun, index) => {
           return (
             <div
               key={index}
@@ -137,7 +130,7 @@ const CardFlip = () => {
                 transition={{ duration: 0.6 }}
               >
                 <Image
-                  src={card.image_url}
+                  src={noun.image_url}
                   alt="word-image"
                   layout="fill"
                   objectFit="fit"
@@ -153,10 +146,10 @@ const CardFlip = () => {
               >
                 <div className="flex flex-col mt-4 items-center justify-normal">
                   <h3 className="justify-start w-fit shadow-formInput p-3  rounded-lg font-semiBold flex text-md border-2 text-gray-900">
-                    {card.polish_word}
+                    {noun.polish_word}
                   </h3>
                   <div className="flex shadow-formInput p-3 mx-4 rounded-lg mt-8 center-text items-center justify-center text-gray-900">
-                    <p className="leading-[1.45rem] text-left">{card.notes}</p>
+                    <p className="leading-[1.45rem] text-left">{noun.notes}</p>
                   </div>
                   {activeIndex === index && (
                     <div className="flex p-2 justify-between w-full py-2 px-8">
@@ -186,7 +179,7 @@ const CardFlip = () => {
                       {!deleteNoun[index] && (
                         <Button
                           variant="secondary"
-                          onClick={() => handleEditNoun(card, index)}
+                          onClick={() => handleEditNoun(noun, index)}
                         >
                           Edit
                         </Button>

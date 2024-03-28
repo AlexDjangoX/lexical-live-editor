@@ -17,10 +17,8 @@ interface Noun {
 
 interface NounsFormProps {
   currentNoun: Partial<Noun> | null;
-  setCurrentNoun: React.Dispatch<React.SetStateAction<Noun>>;
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  nounsToRender: Noun[];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -84,19 +82,21 @@ const NounsForm: React.FC<NounsFormProps> = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isEditing) {
-      try {
-        if (currentNoun.id) {
-          await updateNounById(currentNoun.id, newNoun);
-        }
-        setOpen(false);
+    try {
+      if (isEditing && currentNoun?.id) {
+        await updateNounById(currentNoun.id, newNoun);
         setIsEditing(false);
-      } catch (error) {
-        console.error('Error updating noun:', error);
+      } else {
+        await createNoun(newNoun);
+        setNewNoun({ ...initialNounFormData });
       }
-    } else {
-      await createNoun(newNoun);
-      setNewNoun({ ...initialNounFormData });
+    } catch (error) {
+      if (isEditing) {
+        console.error('Error updating noun:', error);
+      } else {
+        console.error('Error creating noun:', error);
+      }
+    } finally {
       setOpen(false);
     }
   };

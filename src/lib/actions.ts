@@ -300,7 +300,8 @@ export async function createNoun(nounData: Partial<Noun>): Promise<Noun> {
   if (!clerkId) {
     throw new Error('No clerkId');
   }
-
+  console.log(clerkId);
+  console.log(nounData);
   try {
     const newNoun = await prisma.noun.create({
       data: {

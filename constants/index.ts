@@ -2508,7 +2508,7 @@ export const cardDetails = [
   {
     id: 2,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotka',
     english_word: 'cat',
     image_url:
       'https://tse3.mm.bing.net/th/id/OIG1.CVqzbVyYnVGkh3B1oYFf?pid=ImgGn',
@@ -2518,7 +2518,7 @@ export const cardDetails = [
   {
     id: 3,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotką',
     english_word: 'cat',
     image_url:
       'https://tse2.mm.bing.net/th/id/OIG1.xNqL00LZfcGdmtXTCr1U?pid=ImgGn',
@@ -2528,7 +2528,7 @@ export const cardDetails = [
   {
     id: 4,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotem',
     english_word: 'cat',
     image_url:
       'https://tse1.mm.bing.net/th/id/OIG1.SdAx46tDvFTwWjM7Fodu?pid=ImgGn',
@@ -2538,7 +2538,7 @@ export const cardDetails = [
   {
     id: 5,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kocia',
     english_word: 'cat',
     image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
@@ -2548,7 +2548,7 @@ export const cardDetails = [
   {
     id: 6,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotami',
     english_word: 'cat',
     image_url:
       'https://tse3.mm.bing.net/th/id/OIG1.cRV1N32kycMIX9IgdGXf?pid=ImgGn',
@@ -2558,7 +2558,7 @@ export const cardDetails = [
   {
     id: 7,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotkami',
     english_word: 'cat',
     image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
@@ -2568,7 +2568,7 @@ export const cardDetails = [
   {
     id: 8,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kociami',
     english_word: 'cat',
     image_url:
       'https://tse4.mm.bing.net/th/id/OIG4.TplQWsiR0KujmlqJwIUG?pid=ImgGn',
@@ -2578,7 +2578,7 @@ export const cardDetails = [
   {
     id: 9,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'kotku',
     english_word: 'cat',
     image_url:
       'https://tse1.mm.bing.net/th/id/OIG3.ayulI85jAoVqZSTS6.Z6?pid=ImgGn',
@@ -2588,7 +2588,7 @@ export const cardDetails = [
   {
     id: 10,
     category: 'cats',
-    polish_word: 'kot',
+    polish_word: 'z kotką',
     english_word: 'cat',
     image_url:
       'https://tse1.mm.bing.net/th/id/OIG3.rPSs09pFq2_jtPXpSD8Z?pid=ImgGn',
