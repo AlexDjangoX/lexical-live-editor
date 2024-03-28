@@ -167,7 +167,7 @@ export default function PlaygroundApp(): JSX.Element {
       <a
         href="https://github.com/facebook/lexical/tree/main/packages/lexical-playground"
         className="github-corner"
-        aria-label="View source on GitHub"
+        aria-label="View source on GitHub."
       >
         <svg
           width="80"
